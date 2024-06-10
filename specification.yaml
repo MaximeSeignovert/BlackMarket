@@ -1,0 +1,748 @@
+openapi: 3.0.1
+info:
+  version: 2.7.0
+  title: Black market
+  description: Black market est une api 
+servers:
+  - url: http://57.129.12.10:3000/
+paths:
+  /products:
+    x-swagger-router-controller: productController
+    get:
+      x-swagger-endpoint:
+        url: '/products'
+      tags:
+      - Products
+      summary: Récupérer la liste des produits
+      responses:
+        '200':
+          description: Liste des produits récupérée avec succès
+          content:
+            application/json:
+              example:
+                - $ref: '#/components/schemas/Product'
+                - $ref: '#/components/schemas/Product'
+
+    post:
+      tags:
+        - Products
+      summary: Créer un nouveau produit
+      requestBody:
+        description: Nouveau produit à créer
+        required: true
+        content:
+          application/json:
+            example:
+              name: "Nouveau Produit"
+              price: 19.99
+              category: "Electronique"
+      responses:
+        '201':
+          description: Produit créé avec succès
+          content:
+            application/json:
+              example:
+                id: 123
+                name: "Nouveau Produit"
+                price: 19.99
+                category: "Electronique"
+
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Récupérer la liste des utilisateurs
+      responses:
+        '200':
+          description: Liste des utilisateurs récupérée avec succès
+          content:
+            application/json:
+              example:
+                users: [...]  # Liste des utilisateurs
+
+    post:
+      tags:
+        - Users
+      summary: Créer un nouvel utilisateur
+      requestBody:
+        description: Nouvel utilisateur à créer
+        required: true
+        content:
+          application/json:
+            example:
+              username: "nouvel_utilisateur"
+              email: "nouvel_utilisateur@example.com"
+      responses:
+        '201':
+          description: Utilisateur créé avec succès
+          content:
+            application/json:
+              example:
+                id: 456
+                username: "nouvel_utilisateur"
+                email: "nouvel_utilisateur@example.com"
+
+  /categories:
+    get:
+      tags:
+        - Categories
+      summary: Récupérer la liste des catégories
+      responses:
+        '200':
+          description: Liste des catégories récupérée avec succès
+          content:
+            application/json:
+              example:
+                categories: [...]  # Liste des catégories
+
+    post:
+      tags:
+        - Categories
+      summary: Créer une nouvelle catégorie
+      requestBody:
+        description: Nouvelle catégorie à créer
+        required: true
+        content:
+          application/json:
+            example:
+              name: "Nouvelle Catégorie"
+      responses:
+        '201':
+          description: Catégorie créée avec succès
+          content:
+            application/json:
+              example:
+                id: 789
+                name: "Nouvelle Catégorie"
+
+  /orders:
+    get:
+      tags:
+        - Orders
+      summary: Récupérer la liste des commandes
+      responses:
+        '200':
+          description: Liste des commandes récupérée avec succès
+          content:
+            application/json:
+              example:
+                orders: [...]  # Liste des commandes
+
+    post:
+      tags:
+        - Orders
+      summary: Créer une nouvelle commande
+      requestBody:
+        description: Nouvelle commande à créer
+        required: true
+        content:
+          application/json:
+            example:
+              user_id: 456
+              products: [123, 456]
+      responses:
+        '201':
+          description: Commande créée avec succès
+          content:
+            application/json:
+              example:
+                id: 101
+                user_id: 456
+                products: [123, 456]
+
+  /products/{id}:
+    get:
+      tags:
+        - Products
+      summary: Récupérer un produit par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID du produit à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails du produit récupérés avec succès
+          content:
+            application/json:
+              example:
+                id: 123
+                name: "Produit existant"
+                price: 29.99
+                category: "Electronique"
+
+    put:
+      tags:
+        - Products
+      summary: Mettre à jour un produit par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID du produit à mettre à jour
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Nouvelles informations pour le produit
+        required: true
+        content:
+          application/json:
+            example:
+              name: "Produit mis à jour"
+              price: 34.99
+              category: "Electronique"
+      responses:
+        '200':
+          description: Produit mis à jour avec succès
+          content:
+            application/json:
+              example:
+                id: 123
+                name: "Produit mis à jour"
+                price: 34.99
+                category: "Electronique"
+
+    delete:
+      tags:
+        - Products
+      summary: Supprimer un produit par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID du produit à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Produit supprimé avec succès
+
+  /users/{id}:
+    get:
+      tags:
+        - Users
+      summary: Récupérer un utilisateur par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de l'utilisateur à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails de l'utilisateur récupérés avec succès
+          content:
+            application/json:
+              example:
+                id: 456
+                username: "utilisateur_existant"
+                email: "utilisateur_existant@example.com"
+
+    put:
+      tags:
+        - Users
+      summary: Mettre à jour un utilisateur par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de l'utilisateur à mettre à jour
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Nouvelles informations pour l'utilisateur
+        required: true
+        content:
+          application/json:
+            example:
+              username: "utilisateur_mis_a_jour"
+              email: "utilisateur_mis_a_jour@example.com"
+      responses:
+        '200':
+          description: Utilisateur mis à jour avec succès
+          content:
+            application/json:
+              example:
+                id: 456
+                username: "utilisateur_mis_a_jour"
+                email: "utilisateur_mis_a_jour@example.com"
+
+    delete:
+      tags:
+        - Users
+      summary: Supprimer un utilisateur par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de l'utilisateur à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Utilisateur supprimé avec succès
+
+  /users/{id}/orders/:
+    get:
+      tags:
+        - Users
+      summary: Récupérer la liste des commandes pour un utilisateur
+      parameters:
+        - name: id
+          in: path
+          description: ID de l'utilisateur pour lequel récupérer les commandes
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Liste des commandes pour l'utilisateur récupérée avec succès
+          content:
+            application/json:
+              example:
+                orders: [...]  # Liste des commandes pour l'utilisateur
+
+    post:
+      tags:
+        - Users
+      summary: Créer une nouvelle commande pour un utilisateur
+      parameters:
+        - name: id
+          in: path
+          description: ID de l'utilisateur pour lequel créer la commande
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Nouvelle commande à créer pour l'utilisateur
+        required: true
+        content:
+          application/json:
+            example:
+              products: [123, 456]
+      responses:
+        '201':
+          description: Commande créée avec succès
+          content:
+            application/json:
+              example:
+                id: 102
+                user_id: 456
+                products: [123, 456]
+
+  /users/{id}/orders/{id}:
+    get:
+      tags:
+        - Users
+      summary: Récupérer une commande spécifique pour un utilisateur par ID
+      parameters:
+        - name: user_id
+          in: path
+          description: ID de l'utilisateur
+          required: true
+          schema:
+            type: integer
+        - name: order_id
+          in: path
+          description: ID de la commande à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails de la commande récupérés avec succès
+          content:
+            application/json:
+              example:
+                id: 102
+                user_id: 456
+                products: [123, 456]
+
+    put:
+      tags:
+        - Users
+      summary: Mettre à jour une commande spécifique pour un utilisateur par ID
+      parameters:
+        - name: user_id
+          in: path
+          description: ID de l'utilisateur
+          required: true
+          schema:
+            type: integer
+        - name: order_id
+          in: path
+          description: ID de la commande à mettre à jour
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Nouvelles informations pour la commande
+        required: true
+        content:
+          application/json:
+            example:
+              products: [789, 987]
+      responses:
+        '200':
+          description: Commande mise à jour avec succès
+          content:
+            application/json:
+              example:
+                id: 102
+                user_id: 456
+                products: [789, 987]
+
+    delete:
+      tags:
+        - Users
+      summary: Supprimer une commande spécifique pour un utilisateur par ID
+      parameters:
+        - name: user_id
+          in: path
+          description: ID de l'utilisateur
+          required: true
+          schema:
+            type: integer
+        - name: order_id
+          in: path
+          description: ID de la commande à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Commande supprimée avec succès
+
+  /categories/{id}:
+    get:
+      tags:
+        - Categories
+      summary: Récupérer une catégorie par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de la catégorie à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails de la catégorie récupérés avec succès
+          content:
+            application/json:
+              example:
+                id: 789
+                name: "Catégorie existante"
+
+    put:
+      tags:
+        - Categories
+      summary: Mettre à jour une catégorie par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de la catégorie à mettre à jour
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Nouvelles informations pour la catégorie
+        required: true
+        content:
+          application/json:
+            example:
+              name: "Catégorie mise à jour"
+      responses:
+        '200':
+          description: Catégorie mise à jour avec succès
+          content:
+            application/json:
+              example:
+                id: 789
+                name: "Catégorie mise à jour"
+
+    delete:
+      tags:
+        - Categories
+      summary: Supprimer une catégorie par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de la catégorie à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Catégorie supprimée avec succès
+
+  /categories/{id}/products/:
+    get:
+      tags:
+        - Categories
+      summary: Récupérer la liste des produits pour une catégorie
+      parameters:
+        - name: id
+          in: path
+          description: ID de la catégorie pour laquelle récupérer les produits
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Liste des produits pour la catégorie récupérée avec succès
+          content:
+            application/json:
+              example:
+                products: [...]  # Liste des produits pour la catégorie
+
+    post:
+      tags:
+        - Categories
+      summary: Créer un nouveau produit pour une catégorie
+      parameters:
+        - name: id
+          in: path
+          description: ID de la catégorie pour laquelle créer le produit
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Nouveau produit à créer pour la catégorie
+        required: true
+        content:
+          application/json:
+            example:
+              name: "Nouveau Produit pour Catégorie"
+              price: 24.99
+      responses:
+        '201':
+          description: Produit créé avec succès
+          content:
+            application/json:
+              example:
+                id: 124
+                name: "Nouveau Produit pour Catégorie"
+                price: 24.99
+
+  /categories/{id}/products/{id}:
+    get:
+      tags:
+        - Categories
+      summary: Récupérer un produit spécifique pour une catégorie par ID
+      parameters:
+        - name: category_id
+          in: path
+          description: ID de la catégorie
+          required: true
+          schema:
+            type: integer
+        - name: product_id
+          in: path
+          description: ID du produit à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails du produit récupérés avec succès
+          content:
+            application/json:
+              example:
+                id: 124
+                name: "Produit pour Catégorie"
+                price: 24.99
+
+    put:
+      tags:
+        - Categories
+      summary: Mettre à jour un produit spécifique pour une catégorie par ID
+      parameters:
+        - name: category_id
+          in: path
+          description: ID de la catégorie
+          required: true
+          schema:
+            type: integer
+        - name: product_id
+          in: path
+          description: ID du produit à mettre à jour
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Nouvelles informations pour le produit
+        required: true
+        content:
+          application/json:
+            example:
+              name: "Produit mis à jour pour Catégorie"
+              price: 29.99
+      responses:
+        '200':
+          description: Produit mis à jour avec succès
+          content:
+            application/json:
+              example:
+                id: 124
+                name: "Produit mis à jour pour Catégorie"
+                price: 29.99
+
+    delete:
+      tags:
+        - Categories
+      summary: Supprimer un produit spécifique pour une catégorie par ID
+      parameters:
+        - name: category_id
+          in: path
+          description: ID de la catégorie
+          required: true
+          schema:
+            type: integer
+        - name: product_id
+          in: path
+          description: ID du produit à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Produit supprimé avec succès
+
+  
+  /orders/{id}:
+    get:
+      tags:
+        - Orders
+      summary: Récupérer une commande par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de la catégorie
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Détails de la commande récupérés avec succès
+          content:
+            application/json:
+              example:
+                id: 101
+                user_id: 456
+                products: [123, 456]
+    put:
+      tags:
+        - Orders
+      summary: Mettre à jour une commande par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de la commande à mettre à jour
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Nouvelles informations pour la commande
+        required: true
+        content:
+          application/json:
+            example:
+              products: [789, 987]
+      responses:
+       '200':
+          description: Commande mise à jour avec succès
+          content:
+            application/json:
+              example:
+                id: 101
+                user_id: 456
+                products: [789, 987]
+    delete:
+      tags:
+        - Orders
+      summary: Supprimer une commande par ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de la commande à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Commande supprimée avec succès
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        coins:
+          type: integer
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        stats:
+          type: object
+          properties:
+            pv:
+              type: integer
+            esquive:
+              type: integer
+            attaque:
+              type: integer
+            degats:
+              type: integer
+        price:
+          type: number
+        categoryId:
+          type: integer
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    Order:
+      type: object
+      properties:
+        href:
+          type: string
+        id:
+          type: integer
+        userId:
+          type: integer
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: integer
+              quantity:
+                type: integer
+        total:
+          type: number
+        orderDate:
+          type: string
+          format: date

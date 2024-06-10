@@ -1,0 +1,178 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "john_doe",
+      "email": "john.doe@example.com",
+      "password": "hashed_password",
+      "coins": 14749
+    },
+    {
+      "id": 2,
+      "username": "jane_smith",
+      "email": "jane.smith@example.com",
+      "password": "hashed_password",
+      "coins": 55
+    }
+  ],
+  "products": [
+    {
+      "id": 884,
+      "name": "Courte Hache de Sylvebourg",
+      "stats": {
+        "pv": -2,
+        "esquive": -5,
+        "attaque": -2,
+        "degats": -2
+      },
+      "price": 3,
+      "categoryId": 3
+    },
+    {
+      "id": 984,
+      "name": "Double Rapière de Givrebourg",
+      "stats": {
+        "pv": 4,
+        "esquive": -2,
+        "attaque": 2,
+        "degats": -4
+      },
+      "price": 19,
+      "categoryId": 2
+    },
+    {
+      "id": 883,
+      "name": "Lourde Massue de Clairétincelle",
+      "stats": {
+        "pv": 1,
+        "esquive": 2,
+        "attaque": 4,
+        "degats": 4
+      },
+      "price": 14,
+      "categoryId": 7
+    },
+    {
+      "id": 634,
+      "name": "Petite Hache de Rochelune",
+      "stats": {
+        "pv": -2,
+        "esquive": -2,
+        "attaque": -2,
+        "degats": 3
+      },
+      "price": 10,
+      "categoryId": 3
+    },
+    {
+      "id": 860,
+      "name": "Dévastatrice Épée de Astrialto",
+      "stats": {
+        "pv": -2,
+        "esquive": 2,
+        "attaque": 4,
+        "degats": 4
+      },
+      "price": 17,
+      "categoryId": 1
+    },
+    {
+      "id": 37,
+      "name": "Longue Arbalète de Astrialto",
+      "stats": {
+        "pv": 0,
+        "esquive": -5,
+        "attaque": 3,
+        "degats": 0
+      },
+      "price": 16,
+      "categoryId": 5
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Épée"
+    },
+    {
+      "id": 2,
+      "name": "Rapière"
+    },
+    {
+      "id": 3,
+      "name": "Hache"
+    },
+    {
+      "id": 4,
+      "name": "Lance"
+    },
+    {
+      "id": 5,
+      "name": "Arbalète"
+    },
+    {
+      "id": 6,
+      "name": "Dague"
+    },
+    {
+      "id": 7,
+      "name": "Massue"
+    },
+    {
+      "id": 8,
+      "name": "Fronde"
+    }
+  ],
+  "orders": [
+    {
+      "href": "/orders/1",
+      "id": 1,
+      "userId": 1,
+      "products": [
+        {
+          "productId": 1,
+          "quantity": 2
+        },
+        {
+          "productId": 2,
+          "quantity": 1
+        }
+      ],
+      "total": 2099.97,
+      "orderDate": "2023-01-01"
+    },
+    {
+      "href": "/orders/2",
+      "id": 2,
+      "userId": 1,
+      "products": [
+        {
+          "productId": 2,
+          "quantity": 2
+        },
+        {
+          "productId": 3,
+          "quantity": 1
+        }
+      ],
+      "total": 12,
+      "orderDate": "13-12-2023"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "productId": 1,
+      "userId": 1,
+      "rating": 5,
+      "comment": "Excellent laptop!"
+    },
+    {
+      "id": 2,
+      "productId": 2,
+      "userId": 2,
+      "rating": 4,
+      "comment": "Good smartphone, but camera could be better."
+    }
+  ]
+}
